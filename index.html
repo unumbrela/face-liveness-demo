@@ -1,0 +1,97 @@
+好的，這是在您提供的 `index.html` 基礎上，加入了我们新方案所必需的 JavaScript 库引用後的完整程式碼。
+
+唯一的变动是在 `</body>` 标签前，将原来的 `tensorflow.js` 引用替换为 `onnxruntime-web` 的引用，并确保我们自己的 `app.js` 脚本在它之后被加载。
+
+您可以直接复制以下全部内容，并覆盖您现有的 `index.html` 文件。
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIM-Net 人脸真伪鉴别</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>PIM-Net: 实时人脸真伪鉴别</h1>
+        <p>一个基于 PIM-Net 模型的深度学习应用，用于检测数字屏幕攻击</p>
+    </header>
+
+    <main class="container">
+        <section id="demo-section" class="card">
+            <h2>交互式 Demo</h2>
+            <p>上传一张人脸图片，模型将判断其为真实人脸还是伪造攻击。</p>
+
+            <div class="uploader">
+                <img id="image-preview" src="#" alt="Image Preview" class="hidden"/>
+                <div id="upload-prompt">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    <p>点击或拖拽图片到此处</p>
+                </div>
+                <input type="file" id="image-upload" accept="image/*" class="hidden">
+            </div>
+            <button id="upload-button">选择图片</button>
+            <div id="result-box" class="result-box-placeholder">
+                分析结果将显示在这里
+            </div>
+        </section>
+
+        <section id="performance-section" class="card">
+            <h2>模型性能</h2>
+            <p>我的 PIM-Net 模型在多个公开数据集上的表现如下 (使用 mAP, AUC, EER 等指标)。</p>
+            <div class="table-container">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>数据集</th>
+                            <th>APCER (%)</th>
+                            <th>BPCER (%)</th>
+                            <th>ACER (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>OULU-NPU</td>
+                            <td>1.2</td>
+                            <td>0.8</td>
+                            <td>1.0</td>
+                        </tr>
+                        <tr>
+                            <td>SiW</td>
+                            <td>2.5</td>
+                            <td>2.1</td>
+                            <td>2.3</td>
+                        </tr>
+                        <tr>
+                            <td>CASIA-FASD</td>
+                            <td>0.5</td>
+                            <td>0.6</td>
+                            <td>0.55</td>
+                        </tr>
+                         <tr>
+                            <td>Replay-Attack</td>
+                            <td>1.8</td>
+                            <td>1.5</td>
+                            <td>1.65</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>基于 PIM-Net 开发 | 在 <a href="https://github.com/unumbrela/face-liveness-demo" target="_blank">GitHub</a> 上查看项目</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
+```
